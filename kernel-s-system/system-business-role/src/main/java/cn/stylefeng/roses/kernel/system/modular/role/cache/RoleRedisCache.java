@@ -37,13 +37,18 @@ import org.springframework.data.redis.core.RedisTemplate;
  */
 public class RoleRedisCache extends AbstractRedisCacheOperator<SysRole> {
 
-    public RoleRedisCache(RedisTemplate<String, SysRole> redisTemplate) {
-        super(redisTemplate);
-    }
+	public RoleRedisCache(RedisTemplate<String, SysRole> redisTemplate) {
+		super(redisTemplate);
+	}
 
-    @Override
-    public String getCommonKeyPrefix() {
-        return SystemCachesConstants.ROLE_INFO_CACHE_PREFIX;
-    }
+	@Override
+	public void put(String key, SysRole value) {
+		super.put(key, value, SystemCachesConstants.USER_CACHE_TIMEOUT_SECONDS);
+	}
+
+	@Override
+	public String getCommonKeyPrefix() {
+		return SystemCachesConstants.ROLE_INFO_CACHE_PREFIX;
+	}
 
 }

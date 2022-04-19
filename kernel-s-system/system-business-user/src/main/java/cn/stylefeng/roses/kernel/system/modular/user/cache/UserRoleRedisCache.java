@@ -45,6 +45,11 @@ public class UserRoleRedisCache extends AbstractRedisCacheOperator<List<Long>> {
     }
 
     @Override
+    public void put(String key, List<Long> value) {
+        super.put(key, value, SystemCachesConstants.USER_CACHE_TIMEOUT_SECONDS);
+    }
+
+    @Override
     public String getCommonKeyPrefix() {
         return SystemCachesConstants.USER_ROLES_CACHE_PREFIX;
     }

@@ -14,12 +14,17 @@ import java.util.Map;
  */
 public class InterfaceStatisticsRedisCache extends AbstractRedisCacheOperator<Map<Long, Integer>> {
 
-    public InterfaceStatisticsRedisCache(RedisTemplate<String, Map<Long, Integer>> redisTemplate) {
-        super(redisTemplate);
-    }
+	public InterfaceStatisticsRedisCache(RedisTemplate<String, Map<Long, Integer>> redisTemplate) {
+		super(redisTemplate);
+	}
 
-    @Override
-    public String getCommonKeyPrefix() {
-        return StatisticsCacheConstants.INTERFACE_STATISTICS_PREFIX;
-    }
+	@Override
+	public void put(String key, Map<Long, Integer> value) {
+		super.put(key, value, StatisticsCacheConstants.INTERFACE_STATISTICS_CACHE_TIMEOUT_SECONDS);
+	}
+
+	@Override
+	public String getCommonKeyPrefix() {
+		return StatisticsCacheConstants.INTERFACE_STATISTICS_PREFIX;
+	}
 }

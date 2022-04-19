@@ -14,12 +14,22 @@ import org.springframework.data.redis.core.RedisTemplate;
  */
 public class LoginErrorCountRedisCache extends AbstractRedisCacheOperator<Integer> {
 
-    public LoginErrorCountRedisCache(RedisTemplate<String, Integer> redisTemplate) {
-        super(redisTemplate);
-    }
+	public LoginErrorCountRedisCache(RedisTemplate<String, Integer> redisTemplate) {
+		super(redisTemplate);
+	}
 
-    @Override
-    public String getCommonKeyPrefix() {
-        return LoginCacheConstants.LOGIN_ERROR_CACHE_PREFIX;
-    }
+	/**
+	 * 设置冻结时间
+	 * @param key   键
+	 * @param value 值
+	 */
+	@Override
+	public void put(String key, Integer value) {
+		super.put(key, value, LoginCacheConstants.LOGIN_CACHE_TIMEOUT_SECONDS);
+	}
+
+	@Override
+	public String getCommonKeyPrefix() {
+		return LoginCacheConstants.LOGIN_ERROR_CACHE_PREFIX;
+	}
 }

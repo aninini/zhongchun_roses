@@ -24,6 +24,7 @@
  */
 package cn.stylefeng.roses.kernel.security.captcha;
 
+import cn.hutool.cache.CacheUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.stylefeng.roses.kernel.cache.api.CacheOperatorApi;
@@ -50,7 +51,8 @@ public class ImageCaptchaService implements ImageCaptchaApi {
         SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
         String verCode = specCaptcha.text().toLowerCase();
         String verKey = IdUtil.simpleUUID();
-        cacheOperatorApi.put(verKey, verCode);
+        // 验证码过期时间 120秒
+        cacheOperatorApi.put(verKey, verCode, 120L);
         return ImageCaptcha.builder().verImage(specCaptcha.toBase64()).verKey(verKey).build();
     }
 

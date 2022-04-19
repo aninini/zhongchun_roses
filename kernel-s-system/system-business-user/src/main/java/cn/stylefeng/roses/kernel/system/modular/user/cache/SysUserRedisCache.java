@@ -37,13 +37,18 @@ import org.springframework.data.redis.core.RedisTemplate;
  */
 public class SysUserRedisCache extends AbstractRedisCacheOperator<SysUserDTO> {
 
-    public SysUserRedisCache(RedisTemplate<String, SysUserDTO> redisTemplate) {
-        super(redisTemplate);
-    }
+	public SysUserRedisCache(RedisTemplate<String, SysUserDTO> redisTemplate) {
+		super(redisTemplate);
+	}
 
-    @Override
-    public String getCommonKeyPrefix() {
-        return SystemCachesConstants.USER_CACHE_PREFIX;
-    }
+	@Override
+	public void put(String key, SysUserDTO value) {
+		super.put(key, value, SystemCachesConstants.USER_CACHE_TIMEOUT_SECONDS);
+	}
+
+	@Override
+	public String getCommonKeyPrefix() {
+		return SystemCachesConstants.USER_CACHE_PREFIX;
+	}
 
 }

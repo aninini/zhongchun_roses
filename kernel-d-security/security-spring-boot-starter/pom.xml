@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>security-spring-boot-starter</artifactId>
+    <version>zc-7.2.2</version>
 
     <packaging>jar</packaging>
 
@@ -35,7 +36,7 @@
         <dependency>
             <groupId>cn.stylefeng.roses</groupId>
             <artifactId>security-sdk-captcha</artifactId>
-            <version>${roses.version}</version>
+            <version>zc-7.2.2</version>
         </dependency>
 
         <!--count模块-->
@@ -49,7 +50,7 @@
         <dependency>
             <groupId>cn.stylefeng.roses</groupId>
             <artifactId>security-sdk-black-white</artifactId>
-            <version>${roses.version}</version>
+            <version>zc-7.2.2</version>
         </dependency>
 
         <!--请求响应加密解密模块-->

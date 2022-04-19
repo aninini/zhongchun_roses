@@ -38,13 +38,18 @@ import java.util.List;
  */
 public class RoleResourceRedisCache extends AbstractRedisCacheOperator<List<String>> {
 
-    public RoleResourceRedisCache(RedisTemplate<String, List<String>> redisTemplate) {
-        super(redisTemplate);
-    }
+	public RoleResourceRedisCache(RedisTemplate<String, List<String>> redisTemplate) {
+		super(redisTemplate);
+	}
 
-    @Override
-    public String getCommonKeyPrefix() {
-        return SystemCachesConstants.ROLE_RESOURCE_CACHE_PREFIX;
-    }
+	@Override
+	public void put(String key, List<String> value) {
+		super.put(key, value, SystemCachesConstants.USER_CACHE_TIMEOUT_SECONDS);
+	}
+
+	@Override
+	public String getCommonKeyPrefix() {
+		return SystemCachesConstants.ROLE_RESOURCE_CACHE_PREFIX;
+	}
 
 }
